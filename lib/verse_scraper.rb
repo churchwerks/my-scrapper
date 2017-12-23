@@ -2,45 +2,36 @@ require 'nokogiri'
 require 'open-uri'
 require 'pry'
 
-require_relative './topic.rb'
+require_relative './verse.rb'
 
-class TopicScraper
+class VerseScraper
 
   def get_page
-    #doc = Nokogiri::HTML(open("https://www.biblestudytools.com/topical-verses/"))
-    #title = doc.css(".xl-h3.list-group-item-heading").first.text
-    #description = doc.css(".list-group-item").first.css("p").text
-    #url = doc.css(".list-group-item").css("a").attribute("href").value
+    #doc = Nokogiri::HTML(open("https://www.biblestudytools.com/1-john/5-5.html"))
+    #title = doc.css("h1").text
+    #description = doc.css(".verse-5").text
     #binding.pry
-    Nokogiri::HTML(open("https://www.biblestudytools.com/topical-verses/"))
+    Nokogiri::HTML(open("https://www.biblestudytools.com/1-john/5-5.html"))
   end
 
-  def get_topics
-    self.get_page.css(".list-group-item")
+  def make_verse
+    verse = Verse.new
+    post = self.get_page
+    verse.title = post.css("h1").text
+    verse.description = post.css(".verse-5").text
+    verse.save
   end
 
-  def make_topics
-
-    self.get_topics.each do |post|
-      #binding.pry
-        topic = Topic.new
-        topic.title = post.css(".xl-h3.list-group-item-heading").text
-        topic.description = post.css("p").text
-        topic.url = post.css("a").attribute("href").value
-        if topic.title != ""
-        topic.save
+  def print_verse
+    self.make_verse
+    Verse.all.each do |verse|
+      if verse.title != ""
+        puts "Verse: #{verse.title}"
+        puts "   #{verse.description}"
+      else
+        puts "ERROR"
       end
     end
   end
-
-  def print_topics
-    self.make_topics
-    Topic.all.each do |topic|
-      puts "Topic: #{topic.title}"
-      puts "  Description: #{topic.description}"
-      puts "  Link: #{topic.url}"
-    end
-  end
 end
-Scraper.new.get_page
-Scraper.new.print_topics
+VerseScraper.new.print_verse

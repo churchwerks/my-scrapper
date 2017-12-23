@@ -1,5 +1,5 @@
-class Topic
-attr_accessor :title, :description, :url
+class Verse
+attr_accessor :title, :description
 @@all = []
 
   def self.all
