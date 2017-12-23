@@ -7,11 +7,6 @@ require_relative './topic.rb'
 class TopicScraper
 
   def get_page
-    #doc = Nokogiri::HTML(open("https://www.biblestudytools.com/topical-verses/"))
-    #title = doc.css(".xl-h3.list-group-item-heading").first.text
-    #description = doc.css(".list-group-item").first.css("p").text
-    #url = doc.css(".list-group-item").css("a").attribute("href").value
-    #binding.pry
     Nokogiri::HTML(open("https://www.biblestudytools.com/topical-verses/"))
   end
 
@@ -22,7 +17,6 @@ class TopicScraper
   def make_topics
 
     self.get_topics.each do |post|
-      #binding.pry
         topic = Topic.new
         topic.title = post.css(".xl-h3.list-group-item-heading").text
         topic.description = post.css("p").text
@@ -39,8 +33,9 @@ class TopicScraper
       puts "Topic: #{topic.title}"
       puts "  Description: #{topic.description}"
       puts "  Link: #{topic.url}"
+      puts ""
     end
   end
 end
-Scraper.new.get_page
-Scraper.new.print_topics
+TopicScraper.new.get_page
+TopicScraper.new.print_topics
