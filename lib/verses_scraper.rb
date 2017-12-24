@@ -6,8 +6,8 @@ require_relative './verses.rb'
 
 class VersesScraper
 
-  def get_page
-    Nokogiri::HTML(open("https://www.biblestudytools.com/topical-verses/faith-bible-verses/"))
+  def get_page(topic)
+    Nokogiri::HTML(open("https://www.biblestudytools.com/topical-verses/#{topic}-bible-verses/"))
   end
 
   def get_verses

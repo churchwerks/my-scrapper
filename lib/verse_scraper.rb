@@ -7,10 +7,6 @@ require_relative './verse.rb'
 class VerseScraper
 
   def get_page
-    #doc = Nokogiri::HTML(open("https://www.biblestudytools.com/1-john/5-5.html"))
-    #title = doc.css("h1").text
-    #description = doc.css(".verse-5").text
-    #binding.pry
     Nokogiri::HTML(open("https://www.biblestudytools.com/1-john/5-5.html"))
   end
 
