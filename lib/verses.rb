@@ -1,5 +1,5 @@
 class Verses
-attr_accessor :title, :url
+attr_accessor :title, :description, :url
 @@all = []
 
   def self.all

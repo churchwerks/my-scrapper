@@ -14,7 +14,7 @@ class VerseScraper
     verse = Verse.new
     post = self.get_page
     verse.title = post.css("h1").text
-    verse.description = post.css(".verse-5").text
+    verse.description = post.css("div.scripture div span:nth-child(2)").text.strip
     verse.save
   end
 
@@ -30,4 +30,5 @@ class VerseScraper
     end
   end
 end
+VerseScraper.new.get_page
 VerseScraper.new.print_verse
