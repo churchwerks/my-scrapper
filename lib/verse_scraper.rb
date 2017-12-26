@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
-
+#
 require_relative './verse.rb'
 
 class VerseScraper

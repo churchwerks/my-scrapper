@@ -37,5 +37,5 @@ class TopicScraper
     end
   end
 end
-TopicScraper.new.get_page
+
 TopicScraper.new.print_topics
